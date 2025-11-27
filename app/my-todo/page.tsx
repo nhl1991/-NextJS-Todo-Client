@@ -60,7 +60,7 @@ function CreateTodo({ username, userId }: { username: string, userId: number}) {
 
   return (
     <div className="flex flex-col bg-green-200 h-24">
-      <p>{username}'s Todo</p>
+      <p>{username}&apos;s Todo</p>
       <input
         type="text"
         id="title"
@@ -83,7 +83,11 @@ function CreateTodo({ username, userId }: { username: string, userId: number}) {
 }
 
 
-
+interface Todo {
+  id: string,
+  title: string,
+  content: string,
+}
 function GetAllTodo(){
   const params = useSearchParams().get('userId')
   const [todo, setTodo] = useState([]);
@@ -109,7 +113,7 @@ function GetAllTodo(){
     <p>
       {params}
     </p>
-    { todo? todo.map((item, idx)=>{
+    { todo? todo.map((item:Todo)=>{
       return <p key={item.id}>{item.title} / {item.content}</p>
     }) : null} 
 

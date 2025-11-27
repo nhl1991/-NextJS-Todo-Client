@@ -10,17 +10,25 @@ export default function Navigation() {
     console.log(user);
   }, [user]);
   return (
-    <nav className="flex max-w-6xl w-full bg-amber-200 h-16">
+    <nav className="flex items-center justify-between w-full max-w-3xl rounded-xl bg-slate-300 h-16 px-8 py-4">
+      <h1><Link href="/">TODOLIST</Link></h1>
       {user ? (
-        <div>
-          <p>
-            {user.username}/{user.userId}
-          </p>
-          <Link href={`/my-todo?userId=${user.userId}`} >MY TODO</Link>
-          <Logout />
+        <div className="bg-amber-700 flex gap-x-8">
+          <div>
+            <h1>
+              {user.username}&apos;s Todo
+            </h1>
+          </div>
+          <div className="flex gap-4">
+            <Link className="btn-hover" href={`/my-todo?userId=${user.userId}`} >MY TODO</Link>
+            <Logout />
+          </div>
         </div>
       ) : (
-        <Link href={"/signin"}>SIGN IN</Link>
+        <div className="flex gap-x-2 p-2">
+          <Link className="btn-hover" href={"/signin"}>SIGN IN</Link>
+          <Link className="btn-hover" href={"/signup"}>SIGN UP</Link>
+        </div>
       )}
     </nav>
   );
