@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { SERVER_URL } from "@/lib/server";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function SignUpForm() {
