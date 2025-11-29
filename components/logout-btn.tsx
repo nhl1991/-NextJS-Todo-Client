@@ -19,6 +19,6 @@ export default function Logout(){
     }
 
     return(
-        <button onClick={handleLogout}>Log Out</button>
+        <button className="btn-hover" onClick={handleLogout}>SIGN OUT</button>
     )
 }

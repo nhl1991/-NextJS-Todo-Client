@@ -23,7 +23,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const fetchMe = async () => {
       try {
         const res = await fetch('http://localhost:3001/auth/me', {
-          credentials: 'include', 
+          credentials: 'include',
           method: 'GET'
         });
 

@@ -2,20 +2,20 @@
 import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link";
 import { useEffect } from "react";
-import Logout from "./logout-btn";
+import Logout from "../../logout-btn";
 
 export default function Navigation() {
   const { user } = useAuth();
   useEffect(() => {
-    console.log(user);
+    console.log('useAuth() : ', user);
   }, [user]);
   return (
-    <nav className="flex items-center justify-between w-full max-w-3xl rounded-xl bg-slate-300 h-16 px-8 py-4">
-      <h1><Link href="/">TODOLIST</Link></h1>
+    <nav className="flex items-center justify-between w-full max-w-3xl md:min-w-2xl rounded-xl bg-white h-16 px-8 py-4">
+      <h1><Link className="font-extrabold bg-clip-text bg-[radial-gradient(circle_at_center,#00f5ff,#6a00ff)] text-transparent text-2xl" href="/">TODOLIST</Link></h1>
       {user ? (
-        <div className="bg-amber-700 flex gap-x-8">
+        <div className="flex gap-x-8">
           <div>
-            <h1>
+            <h1 className="username-display">
               {user.username}&apos;s Todo
             </h1>
           </div>

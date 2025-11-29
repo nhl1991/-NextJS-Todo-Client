@@ -27,19 +27,31 @@ body {
 
 
 .inputField {
-  @apply border-b-2 border-black transition-colors duration-500
+  @apply border-b-2 border-slate-300 transition-colors duration-500 p-2
 }
 
 .inputField:focus {
   @apply outline-none border-sky-400
 }
 
-.btn-hover {
-  @apply bg-sky-400 font-bold text-base text-white px-3 py-1.5 cursor-pointer rounded-xl;
+.username-display {
+  @apply font-bold text-base px-3 py-1.5 cursor-pointer rounded-xl;
+
 }
+textarea#content {
+  @apply border-2 border-slate-300 transition-colors duration-500 rounded-xl p-2
+}
+textarea#content:focus {
+  @apply border-2 border-sky-400 outline-none transition-colors duration-500
+}
+.btn-hover {
+  @apply bg-sky-400 font-bold md:text-base text-white px-3 py-1.5 cursor-pointer rounded-xl;
+}
+
 
 @media(hover: hover){
   .btn-hover:hover {
     @apply bg-sky-600;
   }
 }
+
