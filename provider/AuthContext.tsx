@@ -1,4 +1,5 @@
 "use client";
+import { SERVER_URL } from "@/lib/server";
 import { createContext, Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface AuthContext {
@@ -22,7 +23,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(()=>{
     const fetchMe = async () => {
       try {
-        const res = await fetch('http://localhost:3001/auth/me', {
+        const res = await fetch(`${SERVER_URL}/auth/me`, {
           credentials: 'include',
           method: 'GET'
         });
@@ -33,7 +34,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
 
         const data = await res.json();
-        console.log('auth : ', data);
         setUser(data); // { id, email, username } 형태라고 가정
       } catch (e) {
         setUser(null);

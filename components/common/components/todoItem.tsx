@@ -1,19 +1,20 @@
 "use client";
 import { Todo } from "@/types/todo";
 import CompleteButton from "./completeButton";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import InputTitle from "./inputTitle";
-import InputContent from "./InputContent";
-
-
+import InputContent from "./inputContent";
+import { SERVER_URL } from "@/lib/server";
 
 export default function TodoItem({
   item,
   userId,
+  setTodo,
 }: {
   item: Todo;
   userId: number | null;
+  setTodo: Dispatch<SetStateAction<Todo[]>>;
 }) {
   const { id, authorId, User } = item;
   const [title, setTitle] = useState<string>(item.title);
@@ -28,9 +29,9 @@ export default function TodoItem({
       published: true,
       public: isPublic,
     };
-    console.log(body);
+
     try {
-      const response = await fetch(`http://localhost:3001/todo/${id}`, {
+      const response = await fetch(`${SERVER_URL}/todo/${id}`, {
         method: "PATCH",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
@@ -58,7 +59,7 @@ export default function TodoItem({
                 <button className="btn-hover" onClick={() => setMode(!mode)}>
                   修正
                 </button>
-                <CompleteButton id={id} title={title} />
+                <CompleteButton id={id} title={title} setTodo={setTodo} />
               </>
             ) : null}
           </div>

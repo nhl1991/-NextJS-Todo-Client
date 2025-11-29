@@ -1,5 +1,4 @@
 "use client";
-import CreateTodo from "@/components/my-todo/createTodo";
 import UserTodoList from "@/components/my-todo/userTodoList";
 import { useAuth } from "@/hooks/useAuth";
 import { useRouter } from "next/navigation";
@@ -16,8 +15,7 @@ export default function Page() {
   if (user)
     return (
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center  bg-white py-12 px-8 rounded-xl shadow-2xl">
-        <CreateTodo username={user.username} userId={user.userId} />
-        <UserTodoList />
+        <UserTodoList user={user} />
       </main>
     );
 }

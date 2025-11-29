@@ -1,22 +1,27 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import InputTitle from "../common/components/inputTitle";
-import InputContent from "../common/components/InputContent";
+import InputContent from "../common/components/inputContent";
+import { Todo } from "@/types/todo";
+import { SERVER_URL } from "@/lib/server";
+
 
 
 export default function CreateTodo({
   username,
   userId,
+  setTodo
 }: {
   username: string;
   userId: number;
+  setTodo: Dispatch<SetStateAction<Todo[]>>
 }) {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [isPublic, setIsPublic] = useState<boolean>(false);
-  const [error, setError] = useState("");
+  const [_, setError] = useState("");
   const router = useRouter();
   const handleOnCreate = async () => {
     const body = {
@@ -27,7 +32,7 @@ export default function CreateTodo({
       public: isPublic,
     };
 
-    const response = await fetch("http://localhost:3001/todo/create", {
+    const response = await fetch(`${SERVER_URL}/todo/create`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -35,6 +40,14 @@ export default function CreateTodo({
     });
 
     if (response.ok) {
+      const result = await response.json()
+      const newTodo = {
+        User: {
+          username
+        }, ...result
+      }
+      setTodo((prev)=>{
+        return [newTodo,...prev]});
       setTitle("");
       setContent("");
       setIsPublic(false);

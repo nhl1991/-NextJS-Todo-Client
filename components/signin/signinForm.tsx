@@ -25,7 +25,7 @@ export default function SignInForm() {
     
         if (response.ok) {
           const { username, userId, email, message } = await response.json();
-          console.log('리스폰스 OK : ', userId);
+
           setUser({ username, email, userId })
           router.push("/");
         }else {

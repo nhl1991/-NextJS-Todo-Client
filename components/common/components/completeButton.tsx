@@ -1,17 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import ConfirmModal from "./confirmModal";
 import { SERVER_URL } from "@/lib/server";
+import { Todo } from "@/types/todo";
 
 export default function CompleteButton({
   id,
   title,
+  setTodo,
 }: {
   id: string;
   title: string;
+  setTodo: Dispatch<SetStateAction<Todo[]>>;
 }) {
-  const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  // const [_, setIsCompleted] = useState<boolean>(false);
   const [isModal, setIsModal] = useState<boolean>(false);
 
   const handleOnClick = async () => {
@@ -19,19 +22,25 @@ export default function CompleteButton({
   };
   const deletePost = async () => {
     // Delete
-    await fetch(`${SERVER_URL}/todo/${id}`,{
-      method: 'DELETE',
-      credentials: 'include',
-    })
+    try {
+      const response = await fetch(`${SERVER_URL}/todo/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      if(response.ok){
+        setTodo((prev) => prev.filter((todo) => todo.id !== id))
+      }
+
+    } catch (err) {}
   };
   const onConfirm = async () => {
-    setIsCompleted(true);
+
     await deletePost();
     setIsModal(false);
   };
   const onCancel = () => {
     setIsModal(false);
-    setIsCompleted(false);
+
   };
 
   return (

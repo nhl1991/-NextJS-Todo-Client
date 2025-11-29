@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { SERVER_URL } from "@/lib/server";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
@@ -10,7 +11,7 @@ export default function SignUpForm() {
   const [error, setError] = useState("");
   const { setUser } = useAuth();
   const handleSignUp = async () => {
-    const response = await fetch("http://localhost:3001/user/create", {
+    const response = await fetch(`${SERVER_URL}/user/create`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
