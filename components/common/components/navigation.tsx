@@ -16,12 +16,12 @@ export default function Navigation() {
         </Link>
       </h1>
       {user ? (
-        <div className="flex gap-x-8">
+        <div className="flex md:gap-x-8 md:text-base text-xs">
           <div>
-            <h1 className="username-display">{user.username}&apos;s Todo</h1>
+            <h1 className="username-display">{user.username}</h1>
           </div>
-          <div className="flex gap-4">
-            <Link className="btn-hover" href={`/my-todo?userId=${user.userId}`}>
+          <div className="flex md:gap-4 gap-2">
+            <Link className="btn-hover flex items-center justify-center" href={`/my-todo?userId=${user.userId}`}>
               MY TODO
             </Link>
             <Logout />

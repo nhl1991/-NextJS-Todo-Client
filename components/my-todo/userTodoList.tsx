@@ -45,12 +45,12 @@ export default function UserTodoList({
 
   return (
     <>
-      <CreateTodo
-        username={user.username}
-        userId={user.userId}
-        setTodo={setTodo}
-      />
       <TodoContainer>
+        <CreateTodo
+          username={user.username}
+          userId={user.userId}
+          setTodo={setTodo}
+        />
         {loading
           ? Array.from({ length: 10 }).map((_, idx) => (
               <TodoSkeleton key={idx} />
