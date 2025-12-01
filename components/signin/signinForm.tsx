@@ -35,9 +35,9 @@ export default function SignInForm() {
       };
   return (
     <>
-      <div className="flex flex-col gap-4 ">
+      <div className="flex flex-col gap-4">
         <div>
-          <label htmlFor="email" className="font-bold text-xs">
+          <label htmlFor="email" className="font-bold text-xs block">
             EMAIL
           </label>
           <input
@@ -49,7 +49,7 @@ export default function SignInForm() {
           />
         </div>
         <div>
-          <label htmlFor="password" className="font-bold text-xs">
+          <label htmlFor="password" className="font-bold text-xs block">
             PASSWORD
           </label>
           <input
