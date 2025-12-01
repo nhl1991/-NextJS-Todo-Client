@@ -37,7 +37,7 @@ export default function SignUpForm() {
     <>
       <div className="flex flex-col gap-4 ">
         <div>
-          <label htmlFor="email" className="font-bold text-xs">
+          <label htmlFor="email" className="font-bold text-xs block">
             EMAIL
           </label>
           <input
@@ -50,7 +50,7 @@ export default function SignUpForm() {
           {email}
         </div>
         <div>
-          <label htmlFor="password" className="font-bold text-xs">
+          <label htmlFor="password" className="font-bold text-xs block">
             PASSWORD
           </label>
           <input
@@ -62,7 +62,7 @@ export default function SignUpForm() {
           />
         </div>
         <div>
-          <label htmlFor="password" className="font-bold text-xs">
+          <label htmlFor="password" className="font-bold text-xs block">
             USERNAME
           </label>
           <input
