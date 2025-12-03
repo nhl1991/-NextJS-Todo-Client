@@ -32,7 +32,21 @@ export default function Home() {
     <Main>
       <TodoContainer>
         {loading ? (
-          Array.from({length: 10}).map((_,idx) => <TodoSkeleton key={idx} />)
+          <>
+            <article className="w-screen h-screen flex items-center justify-center p-4 fixed bg-black/50 top-0 left-0 z-10">
+              <div className="md:max-w-80 w-full h-80 rounded-xl bg-white text-black p-2 flex flex-col justify-between items-center justify-center">
+                <h2 className="text-xl font-extrabold py-8">ご案内</h2>
+                <p className="px-4">
+                  サーバーとデータベースを無料プランで運用しているため、コールドスタートに時間がかかる場合があります。
+                  <br />
+                  少々お待ちいただけますと幸いです。
+                </p>
+              </div>
+            </article>
+            {Array.from({ length: 10 }).map((_, idx) => (
+              <TodoSkeleton key={idx} />
+            ))}
+          </>
         ) : todos ? (
           todos.map((item: Todo) => {
             return (
