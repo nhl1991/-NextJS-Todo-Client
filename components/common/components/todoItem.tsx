@@ -51,7 +51,7 @@ export default function TodoItem({
       } transition-all duration-100 bg-amber-200`}
       key={id}
     >
-      <div className="flex justify-between px-1">
+      <div className="flex justify-between px-1 overflow-scroll ">
         <header className="md:max-w-3xl w-full flex flex-col justify-between items-center">
           <div className="w-full flex gap-x-0.5 justify-end">
             {mode ? null : userId === authorId ? (
@@ -100,7 +100,7 @@ export default function TodoItem({
           </footer>
         </>
       ) : (
-        <p className="px-6 py-1.5 overflow-scroll whitespace-pre-wrap">
+        <p className="px-6 py-1.5 whitespace-pre-wrap">
           {content}
         </p>
       )}

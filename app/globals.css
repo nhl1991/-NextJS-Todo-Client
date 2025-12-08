@@ -55,3 +55,6 @@ textarea#content:focus {
   }
 }
 
+.btn-hover:active {
+  @apply bg-sky-600
+}
