@@ -3,6 +3,7 @@
 import AlertModal from "@/components/common/components/alertModal";
 import TodoItem from "@/components/common/components/todoItem";
 import TodoSkeleton from "@/components/common/skeleton/todoSkeleton";
+import LoadingSpinner from "@/components/common/ui/loadingSpinner";
 import Main from "@/components/common/ui/main";
 import TodoContainer from "@/components/common/ui/todoContainer";
 import TodoItemWrapper from "@/components/common/ui/todoItemWrapper";
@@ -40,9 +41,9 @@ export default function Home() {
             {modalOpen ? (
               <AlertModal setModalOpen={setModalOpen} />
             ) : null}
-            {Array.from({ length: 10 }).map((_, idx) => (
-              <TodoSkeleton key={idx} />
-            ))}
+            <div className="flex items-center justify-center">
+            <LoadingSpinner />
+            </div>
           </>
         ) : todos ? (
           todos.map((item: Todo) => (
