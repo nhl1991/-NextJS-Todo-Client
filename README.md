@@ -34,3 +34,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+### CHANGE LOG
+2025/12/09
+- updateTag로 Todo 등록 후, 캐시 무효화 및 갱신
+- 로그인, Todo 등록, Todo 업데이트를 Form 전송 방식으로 변경.

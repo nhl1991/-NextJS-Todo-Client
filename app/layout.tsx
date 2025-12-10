@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/provider/AuthContext";
 import Navigation from "@/components/common/components/navigation";
+import { getCurrentUser } from "@/lib/getCurrentUser";
+import { SignOut } from "./actions/signOut";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,19 +21,21 @@ export const metadata: Metadata = {
   description: "Simple Todolist.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getCurrentUser();
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          <div className=" flex flex-col gap-4 min-h-screen w-screen items-center bg-zinc-200 font-sans dark:bg-black md:min-w-2xl py-10">
-            <Navigation />
+        <AuthProvider initialUser={user}>
+          <div className="flex flex-col gap-4 min-h-screen max-w-screen items-center font-sans py-10">
+            <Navigation logout={SignOut}/>
             {children}
           </div>
         </AuthProvider>

@@ -1,41 +1,22 @@
 'use client'
+
+import { SignInResponse } from "@/types/todo";
+import Form from "next/form";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/hooks/useAuth";
-import { SERVER_URL } from "@/lib/server";
-export default function SignInForm() {
 
-  const router = useRouter();
-      const [email, setEmail] = useState<string>();
-      const [password, setPassword] = useState<string>();
-      const [ error, setError ] = useState<string>('');
-      const { setUser } = useAuth();
-      const handleSignIn = async () => {
-        if(password=='' || email == '') return;
-    
-        const response = await fetch(`${SERVER_URL}/auth/login`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-          credentials: 'include'
-        });
-    
-        if (response.ok) {
-          const { username, userId, email, message } = await response.json();
+export default function SignInForm({action} : {action: (formData:FormData)=> Promise<SignInResponse>}) {
+  const [error, setError ] = useState<string>('')
+  const handleOnAction = async (formData:FormData) => {
 
-          setUser({ username, email, userId })
-          router.push("/");
-        }else {
-          const result = await response.json();
-          setError(result.message);
-        }
-      };
+    const result = await action(formData);
+    if(!result.success){
+      setError("メールアドレスまたはパスワードが正しくありません。");
+    }
+  }
+
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <Form action={handleOnAction} className="flex flex-col gap-4">
         <div>
           <label htmlFor="email" className="font-bold text-xs block">
             EMAIL
@@ -43,8 +24,8 @@ export default function SignInForm() {
           <input
             className="inputField"
             type="email"
+            name="email"
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
         </div>
@@ -55,20 +36,16 @@ export default function SignInForm() {
           <input
             className="inputField"
             type="password"
+            name="password"
             id="password"
-            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
         </div>
-      </div>
-      <div className="">
-        <button className="btn-hover" onClick={handleSignIn}>
-          SIGN IN
-        </button>
-      </div>
-      <div className="min-h-4 text-red-500">
-        <p>{error}</p>
-      </div>
+        <div className="flex items-center justify-center">
+          <input type="submit" value={"Sign In"} className="btn-hover" />
+        </div>
+      </Form>
+        {error ? <p className="text-[0.625rem] text-red-500">{error}</p>:null}
     </>
   );
 }

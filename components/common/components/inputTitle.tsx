@@ -17,6 +17,7 @@ export default function InputTitle({title, setTitle}: {
         placeholder="Title Input"
         onChange={(e) => setTitle(e.target.value)}
       />
+      <p>0</p>
     </div>
   );
 }

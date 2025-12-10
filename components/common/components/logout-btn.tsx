@@ -1,21 +1,20 @@
 'use client'
 
 import { useAuth } from "@/hooks/useAuth"
-import { SERVER_URL } from "@/lib/server";
+import { SignOutResponse } from "@/types/todo";
+
 import { useRouter } from "next/navigation";
 
-export default function Logout(){
+export default function Logout({ action }: {action: () => Promise<SignOutResponse>}){
     const { setUser } = useAuth();
     const router = useRouter();
     const handleLogout = async () => {
-        const response = await fetch(`${SERVER_URL}/auth/logout`,{
-            method: 'POST',
-            credentials: 'include'
-        })
-
-        if(response.ok){
+        const result = await action();
+        if(result.success || result.code === 401){
             setUser(null);
-            router.push('/')
+            router.push('/');
+        }else {
+            alert(result.message);
         }
     }
 

@@ -1,41 +1,37 @@
-import { useAuth } from "@/hooks/useAuth";
-import { SERVER_URL } from "@/lib/server";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+"use client";
+import {
+  emailSchema,
+  passwordSchema,
+  usernameSchema,
+} from "@/lib/formValidators";
+import Form from "next/form";
+import z, { ZodError } from "zod";
 
-export default function SignUpForm() {
-  const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const { setUser } = useAuth();
-  const handleSignUp = async () => {
-    const response = await fetch(`${SERVER_URL}/user/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        username: username,
-      }),
-    });
-    if (response.ok) {
-      const result = await response.json();
-      setUser(result);
-      // setUser(result)
-      router.push("/");
-    } else {
-      const result = await response.json();
-      setError(result.message);
+export default function SignUpForm({
+  action,
+}: {
+  action: (formData: FormData) => Promise<void>;
+}) {
+  
+  const handleSignUp = async (formData: FormData) => {
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const username = formData.get("username");
+    try {
+      emailSchema.parse(email);
+      passwordSchema.parse(password);
+      usernameSchema.parse(username);
+      action(formData);
+    } catch (err) {
+      if (err instanceof ZodError) {
+        const result = z.prettifyError(err);
+        alert(result);
+      }
     }
   };
   return (
     <>
-      <div className="flex flex-col gap-4 ">
+      <Form action={handleSignUp} className="flex flex-col gap-4 ">
         <div>
           <label htmlFor="email" className="font-bold text-xs block">
             EMAIL
@@ -44,10 +40,9 @@ export default function SignUpForm() {
             className="inputField"
             type="email"
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
+            name="email"
             placeholder="EMAIL"
           />
-          {email}
         </div>
         <div>
           <label htmlFor="password" className="font-bold text-xs block">
@@ -57,7 +52,7 @@ export default function SignUpForm() {
             className="inputField"
             type="password"
             id="password"
-            onChange={(e) => setPassword(e.target.value)}
+            name="password"
             placeholder="PASSWORD"
           />
         </div>
@@ -69,17 +64,14 @@ export default function SignUpForm() {
             className="inputField"
             type="text"
             id="username"
-            onChange={(e) => setUsername(e.target.value)}
+            name="username"
             placeholder="USERNAME"
           />
         </div>{" "}
-      </div>
-      <div className="py-4">
-        <button className="btn-hover" onClick={handleSignUp}>
-          SIGN UP
-        </button>
-        <p className="min-h-4">{error}</p>
-      </div>
+        <div className="py-4">
+          <input type="submit" className="btn-hover" value={"SIGN UP"} />
+        </div>
+      </Form>
     </>
   );
 }
