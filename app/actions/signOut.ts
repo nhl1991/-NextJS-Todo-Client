@@ -18,6 +18,6 @@ export async function SignOut() {
     if(response.status === 401) return {code: response.status, message: 'Expired.', success: false}
     return {code: response.status, message: 'Error', success: false}
   }
-
+  cookie.delete('access_token')
   redirect('/');
 }

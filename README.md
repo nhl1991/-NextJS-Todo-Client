@@ -1,43 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TODOLIST
+## 📖 Overview
+バックエンド学習のため、「Next.js」と「Nest.js」を用いて作成した簡単なTODOアプリです。
 
-## Getting Started
+---
 
-First, run the development server:
+## 🛠 Tech Stack
+### Framework / Library
+- Next.js  
+- React  
+- Nest.js  
 
+### Language
+- TypeScript  
+- HTML5  
+- CSS3  
+
+---
+
+## ✨ Features
+- ログイン、ログアウト  
+- TODO作成、修正、削除  
+- TODOの公開 / 非公開設定  
+- 公開されたTODOページ、ユーザーのTODO一覧ページ  
+
+---
+
+## 🖥️ Preview
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  <img width="360" src="https://github.com/user-attachments/assets/d755f622-b235-47f3-93cb-d143bfc27126" />
+  <img width="360" src="https://github.com/user-attachments/assets/e391540a-6794-4786-a490-ccf88ed266d8" />
+  <img width="360" src="https://github.com/user-attachments/assets/4e41534c-eb6f-4432-8f80-7174155de520" />
+  <img width="360" src="https://github.com/user-attachments/assets/2509cb89-68fc-4525-9aa9-78be9f7db9d2" />
+</div>
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/nhl1991/-NextJS-Todo-Client.git
 ```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## CHANGE LOG
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2025/12/11
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- protected 라우트 수정
+- 로그아웃 기능 수정
 
-## Learn More
+-　protectedルートの認証修正
+-　ログアウト機能修正
 
-To learn more about Next.js, take a look at the following resources:
+### 2025/12/09
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- updateTag로 캐시 무효화 및 갱신
+- 로그아웃, 게시물 관련 로직을 Form + Server Action으로 수정
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-
-
-### CHANGE LOG
-2025/12/09
-- updateTag로 Todo 등록 후, 캐시 무효화 및 갱신
-- 로그인, Todo 등록, Todo 업데이트를 Form 전송 방식으로 변경.
+-　updateTag により Todo 登録後にキャッシュ無効化 & 再取得
+-　ログイン、Todo登録、Todo更新を Form 送信方式に変更
