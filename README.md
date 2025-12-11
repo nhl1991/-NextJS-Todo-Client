@@ -44,8 +44,19 @@ git clone https://github.com/nhl1991/-NextJS-Todo-Client.git
 ---
 
 ## CHANGE LOG
+
+### 2025/12/11
+
+- protected 라우트 수정
+- 로그아웃 기능 수정
+
+-　protectedルートの認証修正
+-　ログアウト機能修正
+
 ### 2025/12/09
 
-updateTag により Todo 登録後にキャッシュ無効化 & 再取得
+- updateTag로 캐시 무효화 및 갱신
+- 로그아웃, 게시물 관련 로직을 Form + Server Action으로 수정
 
-ログイン、Todo登録、Todo更新を Form 送信方式に変更
+-　updateTag により Todo 登録後にキャッシュ無効化 & 再取得
+-　ログイン、Todo登録、Todo更新を Form 送信方式に変更
