@@ -6,6 +6,7 @@ import {
 } from "@/lib/formValidators";
 import Form from "next/form";
 import z, { ZodError } from "zod";
+import FormSubmitButton from "../common/components/FormSubmitButton";
 
 export default function SignUpForm({
   action,
@@ -68,9 +69,7 @@ export default function SignUpForm({
             placeholder="USERNAME"
           />
         </div>{" "}
-        <div className="py-4">
-          <input type="submit" className="btn-hover" value={"SIGN UP"} />
-        </div>
+        <FormSubmitButton label="SIGN UP" />
       </Form>
     </>
   );

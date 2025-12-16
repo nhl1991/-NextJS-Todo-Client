@@ -1,15 +1,20 @@
-'use client'
-import CheckBox from "../common/components/checkBox";
+"use client";
 import Form from "next/form";
 import { todoContentSchema, todoTitleSchema } from "@/lib/formValidators";
 import z, { ZodError } from "zod";
+import FormItem from "./FormItem";
 
-export default function CreateTodo({ userId,action }: { userId: string,action: (formDate:FormData) => Promise<void> }) {
+export default function CreateTodo({
+  userId,
+  action,
+}: {
+  userId: string;
+  action: (formDate: FormData) => Promise<void>;
+}) {
   const handleOnAction = async (formData: FormData) => {
     const title = formData.get("title");
     const content = formData.get("content");
     try {
-      
       todoTitleSchema.parse(title);
       todoContentSchema.parse(content);
       await action(formData);
@@ -25,38 +30,10 @@ export default function CreateTodo({ userId,action }: { userId: string,action: (
     <div>
       {/* <h2 className="text-xl font-bold">{username}&apos;s Todo</h2> */}
       <Form
-        className="flex flex-col max-w-2xl w-full min-h-96 px-8 py-4 rounded-xl gap-4 box-shadow"
+        className="flex flex-col max-w-2xl w-full justify-center min-h-96 px-8 py-4 rounded-xl gap-4 box-shadow"
         action={handleOnAction}
       >
-        <div className="flex flex-col gap-1">
-          <input type="hidden" name="userId" defaultValue={userId} />
-          <label htmlFor="title" className="font-bold">
-            TODO タイトル
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            className="inputField"
-            placeholder="Title Input"
-          />
-        </div>
-        <div className="flex flex-col gap-1">
-          <label htmlFor="content" className="font-bold">
-            TODO 内容
-          </label>
-          <textarea
-            rows={5}
-            cols={50}
-            id="content"
-            name="content"
-            className="resize-none"
-          />
-        </div>
-        <div className="w-full flex justify-between p-2">
-          <CheckBox label="公開" />
-          <input type="submit" className="btn-hover" value={"登録"} />
-        </div>
+        <FormItem userId={userId} />
         {/* <input name="public" type="checkbox" defaultChecked={false} />
         <input type="submit" /> */}
       </Form>

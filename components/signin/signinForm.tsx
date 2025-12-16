@@ -3,6 +3,7 @@
 import { SignInResponse } from "@/types/todo";
 import Form from "next/form";
 import { useState } from "react";
+import FormSubmitButton from "../common/components/FormSubmitButton";
 
 export default function SignInForm({
   action,
@@ -10,13 +11,11 @@ export default function SignInForm({
   action: (formData: FormData) => Promise<SignInResponse>;
 }) {
   const [error, setError] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const handleOnAction = async (formData: FormData) => {
-    setIsLoading(true);
     const result = await action(formData);
     if (!result.success) {
       setError("メールアドレスまたはパスワードが正しくありません。");
-      setIsLoading(false);
+
     }
 
     // when true it redirects the user to /my-todo
@@ -49,9 +48,7 @@ export default function SignInForm({
             placeholder="Password"
           />
         </div>
-        <div className="flex items-center justify-center">
-          <input type="submit" value={isLoading ? "Signing In" : "Sign In"} className="btn-hover" />
-        </div>
+        <FormSubmitButton label="SIGN IN" />
       </Form>
       {error ? <p className="text-[0.625rem] text-red-500">{error}</p> : null}
     </>
