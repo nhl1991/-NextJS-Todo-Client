@@ -1,18 +1,26 @@
-'use client'
+"use client";
 
 import { SignInResponse } from "@/types/todo";
 import Form from "next/form";
 import { useState } from "react";
 
-export default function SignInForm({action} : {action: (formData:FormData)=> Promise<SignInResponse>}) {
-  const [error, setError ] = useState<string>('')
-  const handleOnAction = async (formData:FormData) => {
-
+export default function SignInForm({
+  action,
+}: {
+  action: (formData: FormData) => Promise<SignInResponse>;
+}) {
+  const [error, setError] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const handleOnAction = async (formData: FormData) => {
+    setIsLoading(true);
     const result = await action(formData);
-    if(!result.success){
+    if (!result.success) {
       setError("メールアドレスまたはパスワードが正しくありません。");
+      setIsLoading(false);
     }
-  }
+
+    // when true it redirects the user to /my-todo
+  };
 
   return (
     <>
@@ -42,10 +50,10 @@ export default function SignInForm({action} : {action: (formData:FormData)=> Pro
           />
         </div>
         <div className="flex items-center justify-center">
-          <input type="submit" value={"Sign In"} className="btn-hover" />
+          <input type="submit" value={isLoading ? "Signing In" : "Sign In"} className="btn-hover" />
         </div>
       </Form>
-        {error ? <p className="text-[0.625rem] text-red-500">{error}</p>:null}
+      {error ? <p className="text-[0.625rem] text-red-500">{error}</p> : null}
     </>
   );
 }
