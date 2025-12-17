@@ -34,12 +34,14 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <AuthProvider initialUser={user}>
-          <div className="flex flex-col gap-4 min-h-screen max-w-screen items-center font-sans py-10">
-            <Navigation logout={SignOut}/>
-            {children}
+          <div className="flex flex-col gap-4 max-w-screen items-center font-sans py-10">
+            <Navigation logout={SignOut} />
+            <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-center py-32 md:px-16 px-8 rounded-xl box-shadow">
+              {children}
+            </main>
           </div>
         </AuthProvider>
       </body>
-    </html >
+    </html>
   );
 }
